@@ -1,0 +1,16 @@
+/* ...existing code... */
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .card {
+    background-color: #444;
+    color: #fff;
+}
+
+.dark-mode .card .card-body {
+    background-color: #444;
+    color: #fff;
+}

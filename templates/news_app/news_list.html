@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">News Feed - {{ user.userpreference.get_preferred_news_class_display }}</h2>
+
+{% if news_list %}
+    <div class="row">
+        {% for news in news_list %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.newsTitle }}</h5>
+                        <p class="card-text">{{ news.newsBody|truncatewords:30 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'news_detail' news.newsID %}" class="btn btn-primary">Read More</a>
+                            <small class="text-muted">Views: {{ news.viewCounter }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        No news articles available in your preferred category.
+    </div>
+{% endif %}
+{% endblock %}

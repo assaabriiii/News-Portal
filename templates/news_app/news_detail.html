@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="news-details-section" class="card shadow-sm">
+    {% include 'news_app/news_details_section.html' %}
+</div>
+
+<div id="comments-section" class="mt-4">
+    {% include 'news_app/comments_section.html' %}
+</div>
+
+<div class="mt-4">
+    <h2>Leave a Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    // function applyDarkMode() {
+    //     if (document.body.classList.contains('dark-mode')) {
+    //         document.getElementById('comments-section').classList.add('dark-mode');
+    //     } else {
+    //         document.getElementById('comments-section').classList.remove('dark-mode');
+    //     }
+    // }
+
+    function fetchNewsDetails() {
+        fetch("{% url 'fetch_news_details' news.pk %}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('news-details-section').innerHTML = data.news_html;
+                // applyDarkMode();
+            });
+    }
+
+    function fetchComments() {
+        fetch("{% url 'fetch_comments' news.pk %}")
+            .then(response => response.json())
+            .then(data => {
+                const commentsSection = document.getElementById('comments-section');
+                commentsSection.innerHTML = data.comments_html;
+                // applyDarkMode();
+            });
+    }
+
+    setInterval(fetchNewsDetails, 3000);
+    setInterval(fetchComments, 3000);
+    applyDarkMode();
+</script>
+{% endblock %}

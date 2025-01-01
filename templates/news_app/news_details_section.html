@@ -1,0 +1,9 @@
+
+<div class="card-body">
+    <h1 class="card-title">{{ news.newsTitle }}</h1>
+    <div class="text-muted mb-3">
+        Category: {{ news.get_newsClass_display }} | Views: <span id="viewCounter">{{ news.viewCounter }}</span>
+    </div>
+    <p class="card-text">{{ news.newsBody }}</p>
+    <a href="{% url 'news_list' %}" class="btn btn-primary">Back to News List</a>
+</div>

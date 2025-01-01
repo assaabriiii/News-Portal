@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Your News Feed</h2>
+            <p>
+                Your preferences: 
+                {% for preference in user_preferences %}
+                    <span class="badge bg-primary me-2">{{ preference.get_news_class_display }}</span>
+                {% endfor %}
+                <a href="{% url 'news_preference' %}" class="btn btn-outline-primary btn-sm ms-3">
+                    Change Preferences
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main News Feed -->
+        <div class="col-md-8">
+            {% if news_list %}
+                {% for news in news_list %}
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ news.newsTitle }}</h5>
+                                <span class="badge bg-secondary">{{ news.get_newsClass_display }}</span>
+                            </div>
+                            <p class="card-text">{{ news.newsBody|truncatewords:30 }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'news_detail' news.newsID %}" class="btn btn-primary">Read More</a>
+                                <small class="text-muted">Views: {{ news.viewCounter }}</small>
+                                <small class="text-muted">Comments: {{ news.comments.count }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    No news articles available in your preferred categories.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Trending News Sidebar -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Trending News</h5>
+                </div>
+                <div class="card-body">
+                    {% if trending_news %}
+                        <ul class="list-unstyled">
+                            {% for news in trending_news %}
+                                <li class="mb-3">
+                                    <a href="{% url 'news_detail' news.newsID %}" class="text-decoration-none">
+                                        {{ news.newsTitle }}
+                                    </a>
+                                    <br>
+                                    <span class="badge bg-secondary">{{ news.get_newsClass_display }}</span>
+                                    <small class="text-muted">Views: {{ news.viewCounter }}</small>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No trending news available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

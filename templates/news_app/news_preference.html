@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Select News Preferences</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.news_classes|as_crispy_field }}
+                        <small class="form-text text-muted">
+                            Select multiple categories. The order of selection will determine the priority of news display.
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Preferences</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
