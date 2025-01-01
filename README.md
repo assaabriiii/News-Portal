@@ -1,2 +1,2 @@
 # News-Portal
-A news portal website for my net engineering course project.
+A news portal website for my network engineering course project.
