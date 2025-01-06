@@ -19,20 +19,20 @@
 </div>
 
 <script>
-    // function applyDarkMode() {
-    //     if (document.body.classList.contains('dark-mode')) {
-    //         document.getElementById('comments-section').classList.add('dark-mode');
-    //     } else {
-    //         document.getElementById('comments-section').classList.remove('dark-mode');
-    //     }
-    // }
+    function applyDarkMode() {
+        if (document.body.classList.contains('dark-mode')) {
+            document.getElementById('comments-section').classList.add('dark-mode');
+        } else {
+            document.getElementById('comments-section').classList.remove('dark-mode');
+        }
+    }
 
     function fetchNewsDetails() {
         fetch("{% url 'fetch_news_details' news.pk %}")
             .then(response => response.json())
             .then(data => {
                 document.getElementById('news-details-section').innerHTML = data.news_html;
-                // applyDarkMode();
+                applyDarkMode();
             });
     }
 
@@ -47,7 +47,7 @@
     }
 
     setInterval(fetchNewsDetails, 3000);
-    setInterval(fetchComments, 3000);
+    // setInterval(fetchComments, 3000);
     applyDarkMode();
 </script>
 {% endblock %}

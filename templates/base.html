@@ -83,6 +83,12 @@
             <a class="navbar-brand" href="{% url 'news_list' %}">News Portal</a>
             <a class="nav-item nav-link" href="{% url 'dashboard' %}">Dashboard</a>
 
+            <a class="nav-item nav-link" href="{% url 'technology_news' %}">Technology</a>
+            <a class="nav-item nav-link" href="{% url 'health_news' %}">Health</a>
+            <a class="nav-item nav-link" href="{% url 'sports_news' %}">Sports</a>
+            <a class="nav-item nav-link" href="{% url 'economics_news' %}">Economics</a>
+            <a class="nav-item nav-link" href="{% url 'politics_news' %}">Politics</a>
+
             <div class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                     <span class="nav-item nav-link">Welcome, {{ user.username }}</span>

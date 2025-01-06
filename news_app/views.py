@@ -72,6 +72,41 @@ def dashboard(request):
     }
     return render(request, 'news_app/dashboard.html', context)
 
+    # NOTE
+    # NEWS_CLASSES = [
+    #     ('sports', 'Sports'),
+    #     ('health', 'Health'),
+    #     ('politics', 'Politics'),
+    #     ('economics', 'Economics'),
+    #     ('technology', 'Technology'),
+    # ]
+
+def technology_news(request):
+    news_list = News.objects.filter(newsClass='technology').order_by('-viewCounter')
+    context = {'news_list': news_list}
+    return render(request, 'news_app/tech_news.html', context)
+
+def sports_news(request):
+    news_list = News.objects.filter(newsClass='sports').order_by('-viewCounter')
+    context = {'news_list': news_list}
+    return render(request, 'news_app/sports_news.html', context)
+
+def health_news(request):
+    news_list = News.objects.filter(newsClass='health').order_by('-viewCounter')
+    context = {'news_list': news_list}
+    return render(request, 'news_app/health_news.html', context)
+
+def politics_news(request):
+    news_list = News.objects.filter(newsClass='politics').order_by('-viewCounter')
+    context = {'news_list': news_list}
+    return render(request, 'news_app/politics_news.html', context)
+
+def economics_news(request):
+    news_list = News.objects.filter(newsClass='economics').order_by('-viewCounter')
+    context = {'news_list': news_list}
+    return render(request, 'news_app/economics_news.html', context)
+
+
 class NewsList(LoginRequiredMixin, ListView):
     model = News
     template_name = 'news_app/news_list.html'
