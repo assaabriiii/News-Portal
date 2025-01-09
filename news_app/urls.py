@@ -1,6 +1,9 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.NewsList.as_view(), name='news_list'),
@@ -17,3 +20,6 @@ urlpatterns = [
     path('politics_news/', views.politics_news, name='politics_news'),
     path('economics_news/', views.economics_news, name='economics_news'),
     ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

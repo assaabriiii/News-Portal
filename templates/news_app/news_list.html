@@ -8,6 +8,9 @@
         {% for news in news_list %}
             <div class="col-md-6 mb-4">
                 <div class="card h-100 shadow-sm">
+                    {% if news.newsImage %}
+                        <img src="{{ news.newsImage.url }}" class="card-img-top" alt="{{ news.newsTitle }}">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ news.newsTitle }}</h5>
                         <p class="card-text">{{ news.newsBody|truncatewords:30 }}</p>
@@ -26,3 +29,4 @@
     </div>
 {% endif %}
 {% endblock %}
+

@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<div class="news-details">
+    {% if news.newsImage %}
+        <img src="{{ news.newsImage.url }}" class="img-fluid mb-3" alt="{{ news.newsTitle }}">
+    {% else %}
+    {% endif %}
+</div>
+
 <div id="news-details-section" class="card shadow-sm">
     {% include 'news_app/news_details_section.html' %}
 </div>
@@ -9,6 +17,7 @@
     {% include 'news_app/comments_section.html' %}
 </div>
 
+{% if user.is_authenticated %}
 <div class="mt-4">
     <h2>Leave a Comment</h2>
     <form method="post">
@@ -17,7 +26,13 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+{% else %}
 
+
+<div class="mt-4">
+    <p>You must be logged in to leave a comment. <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endif %}
 <script>
     function applyDarkMode() {
         if (document.body.classList.contains('dark-mode')) {
@@ -47,7 +62,7 @@
     }
 
     setInterval(fetchNewsDetails, 3000);
-    // setInterval(fetchComments, 3000);
+    setInterval(fetchComments, 3000);
     applyDarkMode();
 </script>
 {% endblock %}

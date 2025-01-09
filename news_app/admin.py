@@ -7,11 +7,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ('newsClass',)
     search_fields = ('newsTitle', 'newsBody')
 
-@admin.register(UserPreference)
-class UserPreferenceAdmin(admin.ModelAdmin):
-    list_display = ('user', 'news_class')
+admin.site.site_header = 'News Portal Administration'
+admin.site.site_title = 'News Portal Admin'
+admin.site.index_title = 'Welcome to News Portal Admin'
 
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('news', 'user', 'created_at')
-    search_fields = ('comment_text',)

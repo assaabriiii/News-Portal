@@ -10,6 +10,16 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].help_text = "Your username must be 18 characters or fewer, containing only letters, digits, and @/./+/-/_ symbols."
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) >= 18:
+            raise forms.ValidationError("Username must be less than 18 characters")
+        return username
+
 class NewsPreferenceForm(forms.Form):
     news_classes = forms.MultipleChoiceField(
         choices=News.NEWS_CLASSES,

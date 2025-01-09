@@ -16,7 +16,8 @@ class News(models.Model):
     newsClass = models.CharField(max_length=20, choices=NEWS_CLASSES)
     viewCounter = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    newsImage = models.ImageField(upload_to='news_images/')
+    
     class Meta:
         ordering = ['-viewCounter']
         verbose_name_plural = 'News'
@@ -25,7 +26,7 @@ class News(models.Model):
         return self.newsTitle
 
 class UserPreference(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, max_length=18)
     news_class = models.CharField(
         max_length=20,
         choices=News.NEWS_CLASSES,
