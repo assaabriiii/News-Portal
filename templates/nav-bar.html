@@ -1,0 +1,34 @@
+{% load static %}
+
+<header class="header">
+    <div class="container container--narrow">
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="{% url 'news_list' %}">News</a></li>
+          <li class="header__menuItem"><a href="{% url 'technology_news' %}">Tech</a></li>
+          <li class="header__menuItem"><a href="{% url 'health_news' %}">Health</a></li>
+          <li class="header__menuItem"><a href="{% url 'economics_news' %}">Economy</a></li>
+          <li class="header__menuItem"><a href="{% url 'politics_news' %}">Politic</a></li>
+          <li class="header__menuItem"><a href="{% url 'sports_news' %}">Sport</a></li>
+          <li class="header__menuItem"><a href= "{% url 'news_preference' %}">Preferences</a></li>
+          {% if user.is_authenticated %}
+          <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+            {% csrf_token %}
+          </form>
+          <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+          {% else %}
+          <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Login</a></li>
+          <li class="header__menuItem"><a href="{% url 'signup' %}" class="btn btn--sub">Sign Up</a></li>
+          {% endif %}
+         
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<hr>
