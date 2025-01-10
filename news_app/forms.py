@@ -12,7 +12,7 @@ class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].help_text = "Your username must be 18 characters or fewer, containing only letters, digits, and @/./+/-/_ symbols."
+        self.fields['username'].help_text = "Your username must be 18 characters or fewer"
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -24,8 +24,8 @@ class NewsPreferenceForm(forms.Form):
     news_classes = forms.MultipleChoiceField(
         choices=News.NEWS_CLASSES,
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
-        required=True,
-        label='Select your preferred news categories'
+        required=False,
+        label='Select your preferred news categories:'
     )
 
 class CommentForm(forms.ModelForm):

@@ -42,7 +42,7 @@ def news_preference(request):
                     news_class=news_class,
                     priority=priority
                 )
-            return redirect('dashboard')
+            return redirect('')
     else:
         form = NewsPreferenceForm(initial={'news_classes': initial_preferences})
     
@@ -162,5 +162,5 @@ def fetch_comments(request, pk):
 
 def fetch_news_details(request, pk):
     news = get_object_or_404(News, pk=pk)
-    news_html = render_to_string('news_app/news_details_section.html', {'news': news})
+    news_html = render_to_string('news_app/news_detail.html', {'news': news})
     return JsonResponse({'news_html': news_html})
